@@ -17,21 +17,34 @@
 %% International License (https://creativecommons.org/licenses/by-sa/4.0/).
 %% ---------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerinnerthememetropolis}[2016/02/21 Metropolis inner theme]
+\ProvidesPackage{beamerinnerthememetropolis}[2017/01/23 Metropolis inner theme]
 \RequirePackage{etoolbox}
+\RequirePackage{keyval}
 \RequirePackage{calc}
 \RequirePackage{pgfopts}
 \RequirePackage{tikz}
 \pgfkeys{
   /metropolis/inner/sectionpage/.cd,
     .is choice,
-    none/.code=\metropolis@sectionpage@none,
-    simple/.code=\metropolis@sectionpage@simple,
-    progressbar/.code=\metropolis@sectionpage@progressbar,
+    none/.code=\metropolis@disablesectionpage,
+    simple/.code={\metropolis@enablesectionpage
+                  \setbeamertemplate{section page}[simple]},
+    progressbar/.code={\metropolis@enablesectionpage
+                       \setbeamertemplate{section page}[progressbar]},
+}
+\pgfkeys{
+  /metropolis/inner/subsectionpage/.cd,
+    .is choice,
+    none/.code=\metropolis@disablesubsectionpage,
+    simple/.code={\metropolis@enablesubsectionpage
+                  \setbeamertemplate{section page}[simple]},
+    progressbar/.code={\metropolis@enablesubsectionpage
+                       \setbeamertemplate{section page}[progressbar]},
 }
 \newcommand{\metropolis@inner@setdefaults}{
   \pgfkeys{/metropolis/inner/.cd,
     sectionpage=progressbar,
+    subsectionpage=none
   }
 }
 \setbeamertemplate{title page}{
@@ -73,14 +86,19 @@
   \vspace*{0.5em}
 }
 \setbeamertemplate{subtitle}{
+  \raggedright%
   \insertsubtitle%
   \par%
   \vspace*{0.5em}
 }
+\newlength{\metropolis@titleseparator@linewidth}
+\setlength{\metropolis@titleseparator@linewidth}{0.4pt}
 \setbeamertemplate{title separator}{
+  \tikzexternaldisable%
   \begin{tikzpicture}
-    \draw[fg, fill=fg] (0,0) rectangle (\textwidth, 0.4pt);
+    \fill[fg] (0,0) rectangle (\textwidth, \metropolis@titleseparator@linewidth);
   \end{tikzpicture}%
+  \tikzexternalenable%
   \par%
 }
 \setbeamertemplate{author}{
@@ -98,26 +116,17 @@
   \insertinstitute%
   \par%
 }
-\newcommand{\metropolis@sectionpage@none}{
-  \AtBeginSection{
-    % intenionally empty
-  }
-}
 \defbeamertemplate{section page}{simple}{
-  \centering
-  \usebeamercolor[fg]{section title}
-  \usebeamerfont{section title}
-  \insertsectionhead\\
-}
-\newcommand{\metropolis@sectionpage@simple}{
-  \setbeamertemplate{section page}[simple]
-  \AtBeginSection{
-    \ifbeamer@inframe
-      \sectionpage
-    \else
-      \frame[plain,c,noframenumbering]{\sectionpage}
+  \begin{center}
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    \insertsectionhead\par
+    \ifx\insertsubsectionhead\@empty\else
+      \usebeamercolor[fg]{subsection title}
+      \usebeamerfont{subsection title}
+      \insertsubsectionhead
     \fi
-  }
+  \end{center}
 }
 \defbeamertemplate{section page}{progressbar}{
   \centering
@@ -127,12 +136,22 @@
     \usebeamerfont{section title}
     \insertsectionhead\\[-1ex]
     \usebeamertemplate*{progress bar in section page}
+    \par
+    \ifx\insertsubsectionhead\@empty\else%
+      \usebeamercolor[fg]{subsection title}%
+      \usebeamerfont{subsection title}%
+      \insertsubsectionhead
+    \fi
   \end{minipage}
   \par
   \vspace{\baselineskip}
 }
-\newcommand{\metropolis@sectionpage@progressbar}{
-  \setbeamertemplate{section page}[progressbar]
+\newcommand{\metropolis@disablesectionpage}{
+  \AtBeginSection{
+    % intentionally empty
+  }
+}
+\newcommand{\metropolis@enablesectionpage}{
   \AtBeginSection{
     \ifbeamer@inframe
       \sectionpage
@@ -141,15 +160,36 @@
     \fi
   }
 }
+\setbeamertemplate{subsection page}{%
+  \usebeamertemplate*{section page}
+}
+\newcommand{\metropolis@disablesubsectionpage}{
+  \AtBeginSubsection{
+    % intentionally empty
+  }
+}
+\newcommand{\metropolis@enablesubsectionpage}{
+  \AtBeginSubsection{
+    \ifbeamer@inframe
+      \subsectionpage
+    \else
+      \frame[plain,c,noframenumbering]{\subsectionpage}
+    \fi
+  }
+}
 \newlength{\metropolis@progressonsectionpage}
+\newlength{\metropolis@progressonsectionpage@linewidth}
+\setlength{\metropolis@progressonsectionpage@linewidth}{0.4pt}
 \setbeamertemplate{progress bar in section page}{
   \setlength{\metropolis@progressonsectionpage}{%
     \textwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
   }%
+  \tikzexternaldisable%
   \begin{tikzpicture}
-    \draw[bg, fill=bg] (0,0) rectangle (\textwidth, 0.4pt);
-    \draw[fg, fill=fg] (0,0) rectangle (\metropolis@progressonsectionpage, 0.4pt);
+    \fill[bg] (0,0) rectangle (\textwidth, \metropolis@progressonsectionpage@linewidth);
+    \fill[fg] (0,0) rectangle (\metropolis@progressonsectionpage, \metropolis@progressonsectionpage@linewidth);
   \end{tikzpicture}%
+  \tikzexternalenable%
 }
 \def\inserttotalframenumber{100}
 \newlength{\metropolis@blocksep}
@@ -162,6 +202,8 @@
 \newcommand{\metropolis@block}[1]{
   \par\vskip\medskipamount%
   \setlength{\parskip}{0pt}
+  \ifbeamercolorempty[bg]{block title#1}{%
+    \begin{beamercolorbox}[rightskip=0pt plus 4em]{block title#1}}{%
   \ifbeamercolorempty[bg]{block title}{%
     \begin{beamercolorbox}[rightskip=0pt plus 4em]{block title#1}%
   }%
@@ -171,19 +213,21 @@
       leftskip=\metropolis@blockadjust,
       rightskip=\dimexpr\metropolis@blockadjust plus 4em\relax
     ]{block title#1}%
-  }%
+  }}%
       \usebeamerfont*{block title#1}%
       \metropolis@strut%
       \insertblocktitle%
       \metropolis@strut%
   \end{beamercolorbox}%
   \nointerlineskip%
-  \ifbeamercolorempty[bg]{block body}{
+  \ifbeamercolorempty[bg]{block body#1}{%
+    \begin{beamercolorbox}[vmode]{block body#1}}{
+  \ifbeamercolorempty[bg]{block body}{%
     \begin{beamercolorbox}[vmode]{block body#1}%
   }{%
     \begin{beamercolorbox}[sep=\metropolis@blocksep, vmode]{block body#1}%
     \vspace{-\metropolis@parskip}
-  }%
+  }}%
       \usebeamerfont{block body#1}%
       \setlength{\parskip}{\metropolis@parskip}%
 }
@@ -212,6 +256,40 @@
   \beamer@framebottomskipautobreak=0pt plus .6\paperheight\relax%
   \def\beamer@initfirstlineunskip{}%
 }
+\providebool{metropolis@standout}
+\define@key{beamerframe}{standout}[true]{%
+  \booltrue{metropolis@standout}
+  \begingroup
+    \setkeys{beamerframe}{c}
+    \setkeys{beamerframe}{noframenumbering}
+    \ifbeamercolorempty[bg]{palette primary}{
+      \setbeamercolor{background canvas}{
+        use=palette primary,
+        bg=-palette primary.fg
+      }
+    }{
+      \setbeamercolor{background canvas}{
+        use=palette primary,
+        bg=palette primary.bg
+      }
+    }
+    \setbeamercolor{local structure}{
+      fg=palette primary.fg
+    }
+    \usebeamercolor[fg]{palette primary}
+}
+  \pretocmd{\beamer@reseteecodes}{%
+    \ifbool{metropolis@standout}{
+      \endgroup
+      \boolfalse{metropolis@standout}
+    }{}
+  }{}{}
+  \AtBeginEnvironment{beamer@frameslide}{
+    \ifbool{metropolis@standout}{
+      \centering
+      \usebeamerfont{standout}
+    }{}
+  }
 \metropolis@inner@setdefaults
 \ProcessPgfPackageOptions{/metropolis/inner}
 \endinput
