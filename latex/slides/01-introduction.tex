@@ -6,6 +6,15 @@
 \date{\today}
 
 
+\lstdefinestyle{base}{
+	%language=C,
+	%emptylines=1,
+	%breaklines=true,
+	%basicstyle=\ttfamily\color{black},
+	moredelim=**[is][\color{red}]{@}{@},
+}
+
+
 \begin{document}
 
 % \section{Organisation}
@@ -24,13 +33,23 @@
 	\begin{itemize}
 		\item You know how to use a computer
         \item Please bring your computer with You
-		\item Maybe already knowledge in programming languages?
 % 		\item Java is not your first programming language or you are a fast learner
 	\end{itemize}
 	Proceeding
 	\begin{itemize}
-		\item There will be ~14 lessons
+		\item There will be around 14 lessons
 		\item Each covers a topic and comes with excercises
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Question}
+	What is your programming knowledge?
+	\begin{itemize}
+		\item None
+		\item Tried it once or twice
+		\item Basic knowledge
+		\item Advanced
+		\item 1337 hax0r
 	\end{itemize}
 \end{frame}
 
@@ -38,15 +57,26 @@
 \begin{frame}{Some resources}
 	\begin{itemize}
 		\item You can ask your tutor
-		\item Join the Auditorium group \hfill \\
-			\url{http://auditorium.inf.tu-dresden.de}
+		\item Book: Head first Java \\
+			 \url{https://katalog.slub-dresden.de/id/0-1680506722}
 		\item StackOverflow, FAQs, Online-tutorials, ... \hfill \\
 		\item Official documentation \hfill \\
 			\url{https://docs.oracle.com/javase/8/}
-        \item mailinglist \url{programmierung@ifsr.de}
-        \item Cyberspace (wednesday 5./6. DS)
 		\item Material-Repository \\
-			\url{https://github.com/LeonardFollner/java-lessons}
+			\url{https://github.com/t-hanf/java-lessons}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Communication}
+	\begin{itemize}
+		\item Write an email to \\
+			 \href{mailto:tobias.hanf@mailbox.tu-dresden.de}{tobias.hanf@mailbox.tu-dresden.de} \\
+			 \href{mailto:tobias.hanf@mailbox.tu-dresden.de}{tobias.hanf@mailbox.tu-dresden.de}
+	 	\item Use the "Contact Teacher" button
+	 	\item Write an email to the programming mailing list (all tutors) \\
+	 		\href{mailto:programmierung@ifsr.de}{programmierung@ifsr.de}
+ 		\item Other options, maybe Discord, Matrix, Messenger??
+	 	
 	\end{itemize}
 \end{frame}
 
@@ -127,25 +157,63 @@
    \end{lstlisting}
 \end{frame}
 
-\subsection{Setting up IntelliJ IDEA}
+\subsection{Setting up VSCode}
 
 \begin{frame}{Hello World in an IDE}
    DEMO
 \end{frame}
 
 \begin{frame}{Receive a copy of IntelliJ IDEA}
-  IntelliJ IDEA is a powerful IDE\footnote{Integrated Development Environment}, e.g. for Java.
+  Visual Studio Code is a extensible code editor
   \begin{itemize}
-      \item You can download IntelliJ IDEA at  \\
-          \url{https://www.jetbrains.com/idea/}
-      \item Get an Ultimate-License at \\
-          \url{https://www.jetbrains.com/student/}
-      \item Use JetBrains IDEs for all programming languages
+      \item You can download VSCode at  \\
+          \url{https://code.visualstudio.com/}
+      \item Install the Java extension \\
+       "Language Support for Java(TM) by Red Hat"
   \end{itemize}
-  Ecplipse is free and open-source, but less powerful.
+  Other code editors or IDEs are also fine but you have to know how to use them.
 \end{frame}
 
 \section{Basics}
+
+\begin{frame}{Programming}
+	What is programming ?
+	\begin{itemize}
+		\item<1-> telling a computer what to do
+		\item<2-> different instructions
+		\item<3-> store a date (memory)
+		\item<4-> do something with this date (compute)
+		\item<5-> list instruction in order
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Code concepts}
+	\begin{lstlisting}
+		public class Hello {
+			// Calculates some stuff and outputs everything on the console
+			public static void main(String[] args) {
+				System.out.println(9 * 23);
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Code concepts}
+	\begin{lstlisting}
+		public class Hello {
+			// Calculates some stuff and outputs everything on the console
+			public static void main(String[] args) {	        
+				int x;
+				x = 9;
+				int y = 23;
+				int z;
+				z = x * y;
+				
+				System.out.println(z);
+			}
+		}
+	\end{lstlisting}
+\end{frame}
 
 \begin{frame}[fragile]{Comments}
    \begin{lstlisting}
@@ -167,53 +235,12 @@
 
 \subsection{Some definitions}
 
-\begin{frame}[fragile]{Code concepts}
-	\begin{lstlisting}
-	public class Hello {
-	    // Calculates some stuff and outputs everything on the console
-	    public static void main(String[] args) {	        
-	        int x;
-	        x = 9;
-	        int y = 23;
-	        int z;
-	        z = x * y;
-	        
-	        System.out.println(z);
-	    }
-	}
-	\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Code concepts}
-	\begin{lstlisting}
-	public class Hello {
-	    // Calculates some stuff and outputs everything on the console
-	    public static void main(String[] args) {
-	        System.out.println(9 * 23);
-	    }
-	}
-	\end{lstlisting}
-\end{frame}
-
-\begin{frame}{Primitive data types}
-	Java supports some primitive data types:
-	\begin{itemize}
-		\item[boolean] a truth value (either \textbf{true} or \textbf{false})
-		\item[int] a 32 bit integer
-		\item[long] a 64 bit integer
-		\item[float] a 32 bit floating point number
-		\item[double] a 64 bit floating point number
-		\item[char] an ascii character
-		\item[void] the empty type (needed in later topics)
-	\end{itemize}
-\end{frame}
-
 \begin{frame}[fragile]{About the Semicolon}
-	\begin{lstlisting}
+	\begin{lstlisting}[style=base]
 	public class Hello {
 	    // prints a "Hello World!" on your console
 	    public static void main(String[] args) {
-	        System.out.println("Hello World!")@\textcolor{red}{\texttt{;}}@
+	        System.out.println("Hello World!") @;@
 	    }
 	}
 	\end{lstlisting}
@@ -222,13 +249,13 @@
 \end{frame}
 
 \begin{frame}[fragile]{Blocks}
-	\begin{lstlisting}
-	public class Hello @\textcolor{red}{\texttt{\{}}@
+	\begin{lstlisting}[style=base]
+	public class Hello @{@
 	    // prints a "Hello World!" on your console
 	    public static void main(String[] args) {
 	        System.out.println("Hello World!");
 	    }
-	@\textcolor{red}{\texttt{\}}}@
+	@}@
 	\end{lstlisting}
 	Everything between \{ and \} is a \emph{block}. \\
 	Blocks may be nested.
@@ -254,23 +281,65 @@
 	\end{lstlisting}
 \end{frame}
 
+\begin{frame}{Primitive data types}
+	Java supports some primitive data types:
+	\begin{itemize}
+		\item[boolean] a truth value (either \textbf{true} or \textbf{false})
+		\item[int] a 32 bit integer
+		\item[long] a 64 bit integer
+		\item[float] a 32 bit floating point number
+		\item[double] a 64 bit floating point number
+		\item[char] an unicode character
+		\item[void] the empty type (needed in later topics)
+	\end{itemize}
+\end{frame}
+
 \subsection{Calculating}
 
 \begin{frame}[fragile, allowframebreaks]{Calculating with \emph{int}}
 	\begin{lstlisting}
 	public class Calc {
 	    public static void main(String[] args) {
-	        int a; // declare variable a
-	        a = 7; // assign 7 to variable a
-	        System.out.println(a); // prints: 7
+	        int a;
+	        a = 7;
+	        System.out.println(a);
 	        a = 8;
-	        System.out.println(a); // prints: 8
+	        System.out.println(a);
 	        a = a + 2;
-	        System.out.println(a); // prints: 10
+	        System.out.println(a);
 	    }
 	}
 	\end{lstlisting}
-	After the first assignment the variable is initialized.
+	
+\framebreak
+\begin{lstlisting}
+	public class Calc {
+		public static void main(String[] args) {
+			int a; // declare variable a
+			a = 7; // assign 7 to variable a
+			System.out.println(a); // prints: 7
+			a = 8;
+			System.out.println(a); // prints: 8
+			a = a + 2;
+			System.out.println(a); // prints: 10
+		}
+	}
+\end{lstlisting}
+After the first assignment the variable is initialized.
+\framebreak
+\begin{lstlisting}
+	public class Calc {
+		public static void main(String[] args) {
+			int a = -9;
+			int b;
+			b = a;
+			System.out.println(a);
+			System.out.println(b); 
+			a++;
+			System.out.println(a); 
+		}
+	}
+\end{lstlisting}
 \framebreak
 	\begin{lstlisting}
 	public class Calc {
@@ -325,16 +394,30 @@
 	    }
 	}
 	\end{lstlisting}
+
+\framebreak
+\begin{lstlisting}
+	public class Calc {
+		public static void main(String[] args) {
+			float a = 0.1f;
+			float b = 0.2f;
+
+			System.out.println(((a + b) == 0.3));
+		}
+	}
+\end{lstlisting}
+
+
 \framebreak
 	\begin{lstlisting}
 	public class Calc {
-	    public static void main(String[] args) {
-	        float a =       8.9f;
-	        float b = 3054062.5f;
-	        System.out.println(a); // prints: 8.9
-	        System.out.println(b); // prints: 3054062.5
-	        System.out.println(a + b); // prints: 3054071.5
-	    }
+		public static void main(String[] args) {
+			float a = 0.1f;
+			float b = 0.2f;
+			
+			System.out.println(((a + b) == 0.3)); // false
+			System.out.println((a + b));
+		}
 	}
 	\end{lstlisting}
 	Float has a limited precision. \\
