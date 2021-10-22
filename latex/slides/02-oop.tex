@@ -2,20 +2,269 @@
 \input{../templates/course_information}
 
 \title{Java}
-\subtitle{Controll Statements and OOP}
+\subtitle{Control Statements and OOP}
 \date{\today}
+
+\lstdefinestyle{base}{
+	%language=C,
+	%emptylines=1,
+	%breaklines=true,
+	%basicstyle=\ttfamily\color{black},
+	moredelim=**[is][\color{red}]{@}{@},
+}
 
 \begin{document}
 
 \begin{frame}
 	\titlepage
 \end{frame}
+
 \begin{frame}{Overview}
 	\setbeamertemplate{section in toc}[sections numbered]
 	\tableofcontents
 \end{frame}
 
+
 \section{Recalling last session}
+
+\begin{frame}[fragile]{Blocks}
+	\begin{lstlisting}[style=base]
+		public class Hello @{@
+			// prints a "Hello World!" on your console
+			public static void main(String[] args) {
+				System.out.println("Hello World!");
+			}
+			@}@
+	\end{lstlisting}
+	Everything between \{ and \} is a \emph{block}. \\
+	Blocks may be nested.
+\end{frame}
+
+\begin{frame}[fragile]{Naming of Variables}
+	\begin{itemize}
+		\item The names of variables can begin with any letter or underscore. \\
+		Usually the name starts with small letter.
+		\item Compound names should use CamelCase.
+		\item Use meaningful names.
+	\end{itemize}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a = 0; // not very meaningful
+				float myFloat = 5.3f; // also not meaningfull
+				int count = 7; // quite a good name
+				
+				int rotationCount = 7; // there you go
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Primitive data types}
+	Java supports some primitive data types:
+	\begin{itemize}
+		\item[boolean] a truth value (either \textbf{true} or \textbf{false})
+		\item[int] a 32 bit integer
+		\item[long] a 64 bit integer
+		\item[float] a 32 bit floating point number
+		\item[double] a 64 bit floating point number
+		\item[char] an unicode character
+		\item[void] the empty type (needed in later topics)
+	\end{itemize}
+\end{frame}
+
+\subsection{Calculating}
+
+\begin{frame}[fragile, allowframebreaks]{Calculating with \emph{int}}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a;
+				a = 7;
+				System.out.println(a);
+				a = 8;
+				System.out.println(a);
+				a = a + 2;
+				System.out.println(a);
+			}
+		}
+	\end{lstlisting}
+	
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a; // declare variable a
+				a = 7; // assign 7 to variable a
+				System.out.println(a); // prints: 7
+				a = 8;
+				System.out.println(a); // prints: 8
+				a = a + 2;
+				System.out.println(a); // prints: 10
+			}
+		}
+	\end{lstlisting}
+	After the first assignment the variable is initialized.
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a = -9;
+				int b;
+				b = a;
+				System.out.println(a);
+				System.out.println(b); 
+				a++;
+				System.out.println(a); 
+			}
+		}
+	\end{lstlisting}
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a = -9; // declaration and assignment of a
+				int b; // declaration of b
+				b = a; // assignment of b
+				System.out.println(a); // prints: -9
+				System.out.println(b); // prints: -9
+				a++; // increments a
+				System.out.println(a); // prints: -8
+			}
+		}
+	\end{lstlisting}
+	% \framebreak
+	% 	\begin{lstlisting}
+		% 	public class Calc {
+			% 	    public static void main(String[] args) {
+				% 	        int b; // declaration of b
+				% 	        System.out.println(b);
+				% 	    }
+			% 	}
+		% 	\end{lstlisting}
+	% 	Uninitialized variables will cause an Exception. \\
+	% 	An Exception is a kind of error we will discuss later.\\
+	% 	\vspace{1em}
+	% 	\emph{Always assign your variables!}
+	% \framebreak
+	
+	\framebreak
+	Some basic mathematical operations:
+	\begin{tabular}{ll}
+		Addition & \texttt{a + b;} \\
+		Subtraction & \texttt{a - b;} \\
+		Multiplication &\texttt{a * b;} \\
+		Division & \texttt{a / b;} \\
+		Modulo & \texttt{a \% b;} \\
+		Increment & \texttt{a++;} \\
+		Decrement & \texttt{a--;} \\
+	\end{tabular}
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Calculating with \emph{float}}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				float a = 9;
+				float b = 7.5f;
+				System.out.println(a); // prints: 9.0
+				System.out.println(b); // prints: 7.5
+				System.out.println(a + b); // prints: 16.5
+			}
+		}
+	\end{lstlisting}
+	
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				float a = 0.1f;
+				float b = 0.2f;
+				
+				System.out.println(((a + b) == 0.3));
+			}
+		}
+	\end{lstlisting}
+	
+	
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				float a = 0.1f;
+				float b = 0.2f;
+				
+				System.out.println(((a + b) == 0.3)); // false
+				System.out.println((a + b));
+			}
+		}
+	\end{lstlisting}
+	Float has a limited precision. \\
+	\emph{This might lead to unexpected results!}
+\end{frame}
+
+\begin{frame}[fragile]{Mixing \emph{int} and \emph{float}}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				float a = 9.3f;
+				int b = 3;
+				System.out.println(a + b); // prints: 12.3
+				float c = a + b;
+				System.out.println(c); // prints: 12.3
+			}
+		}
+	\end{lstlisting}
+	Java converts from \textbf{int} to \textbf{float} by default, if necessary. \\
+	But not vice versa.
+\end{frame}
+
+\subsection{Text with Strings}
+
+\begin{frame}[fragile]{Strings}
+	A String is not a primitive data type but an object. \\
+	We discuss objects in detail in the next section.
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				String hello = "Hello World!";
+				System.out.println(hello); // print: Hello World!
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Concatenation}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				String hello = "Hello";
+				String world = " World!";
+				String sentence = hello + world;
+				System.out.println(sentence);
+				System.out.println(hello + " World!");
+			}
+		}
+	\end{lstlisting}
+	You can concatenate Strings using the +. Both printed lines look the same.
+\end{frame}
+
+\begin{frame}[fragile]{Strings and Numbers}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int factorA = 3;
+				int factorB = 7;
+				int product = factorA * factorB;
+				String answer =
+				factorA + " * " + factorB + " = " + product;
+				System.out.println(answer); // prints: 3 * 7 = 21
+			}
+		}
+	\end{lstlisting}
+	Upon concatenation, primitive types will be replaced by their current value as \emph{String}.
+\end{frame}
+
 \begin{frame}{Conclusion}
 	Datatypes
 	\begin{itemize}
@@ -26,8 +275,93 @@
 	Hello World example
 \end{frame}
 
-\section{Controll Statements}
-\begin{frame}{Controll Statements}
+\section{Input}
+\begin{frame}[fragile, allowframebreaks]{Taking input from \emph{the User} }
+	
+	To take input from the user we use the Scanner class. 
+	For this we need to import the java.util.io package. 
+	
+	\begin{lstlisting}
+		import java.util.Scanner; 
+		public class Input
+		{
+			public static void main(String[] args)
+			{
+				//do something
+			}
+		}
+	\end{lstlisting}
+\framebreak
+
+	To use the Scanner class we create a new Scanner object.\\
+	//not telling you what an object means at this stage
+	
+	\begin{lstlisting}
+		import java.util.Scanner; 
+		public class Input
+		{
+			public static void main(String[] args)
+			{
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Please input a number: ");
+			int a = sc.nextInt();
+			System.out.println("Input number = "+a);
+				
+			}
+		}
+	\end{lstlisting}
+
+\framebreak
+
+To use the Scanner class we create a new Scanner object.\\
+//For educational purposes only
+
+\begin{lstlisting}
+	import java.util.Scanner; 
+	public class Input
+	{
+		public static void main(String[] args)
+		{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Please input a number: ");
+		int a = sc.nextInt();
+		System.out.println("Input number = "+a);
+		
+		System.out.print("Please input a decimal number: ");
+		Double b = sc.nextDouble();
+		System.out.println("Input number = "+b);
+		}
+	}
+\end{lstlisting}
+
+\framebreak
+
+\begin{lstlisting}
+	import java.util.Scanner; 
+	public class Input
+	{
+		public static void main(String[] args)
+		{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Please input a number: ");
+		int a = sc.nextInt();
+		System.out.println("Input number = "+a);
+		System.out.print("Please input a decimal number: ");
+		Double b = sc.nextDouble();
+		System.out.println("Input number = "+b);
+			System.out.print("Please input a String: ");
+			String c = sc.nextLine();
+			System.out.println("Input String = "+c);	
+		}
+	}
+\end{lstlisting}
+
+\end{frame}
+
+
+
+\section{Control Statements}
+\begin{frame}{Control Statements}
 	
 	\begin{itemize}
 		\item if, else, else if
@@ -36,6 +370,8 @@
 	\end{itemize}
 		
 \end{frame}
+
+
 
 \subsection{Ite}
 \begin{frame}[fragile]{{\huge I}f {\huge T}hen {\huge E}lse}
@@ -131,245 +467,13 @@ public class WhileExample {
 \end{frame}
 
 
-\section{OOP in Java}
-
-\begin{frame}{}
+\begin{frame}
 	\begin{center}
-		{\huge Object Oriented Programming}
-	\end{center}
-\end{frame}
-
-\subsection{General information}
-
-\begin{frame}[fragile]{Class Student}
-\begin{lstlisting}
-public class Student {
-
-	// Attributes
-	private String name; 
-	private int matriculationNumber; 
-	
-	
-	// Methods
-	public void setName(String name) {
-		this.name = name;
-	}
-    
-	public int getMatriculationNumber() {
-		return matriculationNumber;
-	}
-    
-}
-\end{lstlisting}
-
-% What is visible here:
-% Attributes store the state of the object
-% Methods implement the behaviour of the object
+		\includegraphics[angle=-90, width=\textwidth]{0001}
+	\end{center}	
 
 \end{frame}
 
-\begin{frame}[fragile]{Creation}
-	We learned how to declare and assign a primitive datatype.
-	
-	\begin{lstlisting}
-	    int a; // declare a
-	    a = 273; // assign 273 to a
-	\end{lstlisting} 
-	
-	The creation of an object works similar.
-	
-	\begin{lstlisting}
-	    Student example = new Student(); 
-		// create an instance of Student
-	\end{lstlisting}
-	The \textbf{object} derived from a \textbf{class} is also called \textbf{instance}.
-	The variable is called the \textbf{reference}.
-\end{frame}
 
-\subsection{Methods}
-\begin{frame}[fragile]{Calling a Method}
-	\begin{lstlisting}
-	public class Student {
-    
-		private String name;
-	
-		public String getName() {
-        	return name;
-    	}
-		
-	    public void setName(String newName) {
-			name = newName;
-	    }
-	   
-	}
-	\end{lstlisting}
-	The class \emph{Student} has two methods: \emph{void printTimetable()} and \emph{void printName()}.
-\end{frame}
-
-\begin{frame}[fragile]{Calling a Method}
-\begin{lstlisting}
-public class Main {
-
-    public static void main(String[] args) {
-        Student example = new Student(); // creation
-        example.setName("Jane"); // method call
-        String name = example.getName(); 
-		System.out.println(name); // Prints "Jane"
-    }
-    
-}
-	\end{lstlisting}
-	You can call a method of an object after its creation with \textbf{reference.methodName();}.
-\end{frame}
-
-\begin{frame}[fragile]{Calling a Method}
-\begin{lstlisting}
-	public class Student {
-    
-		private String name;
-	
-	    public void setName(String newName) {
-			name = newName;
-			printName();   // Call own method
-			this.printName(); // Or this way
-	    }
-	    
-	    public void printName() {
-	        System.out.println(name);
-	    }
-        
-	}
-	\end{lstlisting}
-	You can call a method of the own object by simply writing \textbf{methodName();} or \textbf{this.methodName();}
-\end{frame}
-
-\begin{frame}[fragile]{Methods with Arguments}
-
-\begin{lstlisting}
-public class Calc {
-
-    public void add(int summand1, int summand2) {
-        System.out.println(summand1 + summand2);
-    }
-	    
-    public static void main(String[] args) {
-        int summandA = 1;
-        int summandB = 2;
-        Calc calculator = new Calc();
-        System.out.print("1 + 2 = ");
-        calculator.add(summandA, summandB); 
-		// prints: 3
-    }
-    
-}
-	\end{lstlisting}
-\end{frame}
-
-\subsection{Return Value}
-\begin{frame}[fragile]{Methods with Return Value}
-	A method without a return value is indicated by \textbf{void}:
-	\begin{lstlisting}
-	public void add(int summand1, int summand2) {
-	    System.out.println(summand1 + summand2);
-	}
-	\end{lstlisting}
-	A method with an \textbf{int} as return value:
-	\begin{lstlisting}
-	public int add(int summand1, int summand2) {
-	    return summand1 + summand2;
-	}
-	\end{lstlisting}
-	% TODO explain return statement
-\end{frame}
-
-\begin{frame}[fragile]{Calling Methods with a return value}
-	\begin{lstlisting}
-	public class Calc {
-	
-	    public int add(int summand1, int summand2) {
-	        return summand1 + summand2;
-	    }
-	    
-	    public static void main(String[] args) {
-	        Calc calculator = new Calc();
-	        int sum = calculator.add(3, 8);
-	        System.out.print("3 + 8 = " + sum); 
-			// prints: 3 + 8 = 11
-	    }
-        
-	}
-	\end{lstlisting}
-\end{frame}
-
-\subsection{Constructor}
-
-\begin{frame}[fragile]{Constructors}
-	\begin{lstlisting}
-	public class Calc {
-    
-		private int summand1;
-		private int summand2;
-	
-	    public Calc() {
-			summand1 = 0;
-			summand2 = 0;
-	    }
-        
-	}
-	\end{lstlisting}
-	A constructor gets called upon creation of the object
-\end{frame}
-
-\begin{frame}[fragile]{Constructors with Arguments}
-	\begin{lstlisting}
-	public class Calc {
-    
-		private int summand1;
-		private int summand2;
-	
-	    public Calc(int x, int y) {
-			summand1 = x;
-			summand2 = y;
-	    }
-        
-	}
-	\end{lstlisting}
-	\begin{lstlisting}
-	[...]
-	Calc myCalc = new Calc(7, 9);
-	\end{lstlisting}
-    
-	A constructor can have arguments as well!
-\end{frame}
-
-\section{Conclusion}
-\subsection{An Example}
-
-\begin{frame}{An Example}
-	You want to program an enrollment system, for a programming course. \\
-	\vspace{1em}
-	Your classes are:\\
-	\begin{description}
-		\item[student] who wants to attend the course
-		\item[lesson] which is a part of the course
-		\item[tutor] the guy with the bandshirt
-		\item[room] where your lessons take place
-		\item[\dots]
-	\end{description}
-% 	The more you think about it, the more complex this program becomes.
-% 	Focus on the relevant things.
-%	Think about how the objects can be in relation, this will be discussed later
-%	Show prepared classes in Java
-\end{frame}
-
-
-\begin{frame}[fragile]{Class Student}
-\begin{lstlisting}
-public static void main(String[] args) {
-	Student peter = new Student();
-	peter.changeName("Peter");
-}
-\end{lstlisting}
-\end{frame}
 
 \end{document}
