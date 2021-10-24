@@ -52,3 +52,4 @@ Thumbs.db
 
 # pdf-folder created by build.sh
 pdf/
+latex/slides/*.pdf
