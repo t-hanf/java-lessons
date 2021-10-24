@@ -1,0 +1,558 @@
+\input{../templates/course_definitions}
+\input{../templates/course_information}
+
+\title{Java}
+\subtitle{Kontrollstatements and OOP}
+\date{\today}
+
+\lstdefinestyle{base}{
+	%language=C,
+	%emptylines=1,
+	%breaklines=true,
+	%basicstyle=\ttfamily\color{black},
+	moredelim=**[is][\color{red}]{@}{@},
+}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{Übersicht}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+\end{frame}
+
+
+\section{Wiederholung }
+
+\begin{frame}[fragile]{Blocks}
+	\begin{lstlisting}[style=base]
+		public class Hello @{@
+			// gibt "Hello, world!" in der Konsole aus
+			public static void main(String[] args) {
+				System.out.println("Hello World!");
+			}
+			@}@
+	\end{lstlisting}
+	Alles zwischen \{ und \} ist Inhalt eines \emph{Blockes}. \\
+	Blöcke können geschachtelt sein.
+\end{frame}
+
+\begin{frame}[fragile]{Benennung von Variablen}
+	\begin{itemize}
+		\item Ein Variablenname kann mit einem Buchstaben oder einen \_ Underscore beginnen. \\
+		Normalerweise beginnen sie mit einem kleinen Buchstaben.
+		\item Für zusammengesetzte Namen verwendet man die CamleCase-Notation.
+		\item Es sollten immer aussagekraeftige Namen verwendet werden.
+	\end{itemize}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a = 0; // nicht sehr aussagekraeftig
+				float myFloat = 5.3f; // auch nicht sehr aussagekraeftig
+				int count = 7; // ein besserer Name
+				
+				int rotationCount = 7; // so sollte es sein
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Primitive Datentypen}
+	Java unterstützt einige primitive Datentypen:
+	\begin{itemize}
+		\item[boolean] ein Wahrheitswert (entweder \textbf{true} oder \textbf{false})
+		\item[int] a 32 bit integer (ganze Zahl)
+		\item[long] a 64 bit integer
+		\item[float] a 32 bit floating point number (Gleitkommazahl)
+		\item[double] a 64 bit floating point number
+		\item[char] an unicode character
+		\item[void] leerer Typ (für Später)
+	\end{itemize}
+\end{frame}
+
+\subsection{Rechnen}
+
+\begin{frame}[fragile, allowframebreaks]{Rechnen mit \emph{int}}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a;
+				a = 7;
+				System.out.println(a);
+				a = 8;
+				System.out.println(a);
+				a = a + 2;
+				System.out.println(a);
+			}
+		}
+	\end{lstlisting}
+	
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a; // deklariert die Variable a
+				a = 7; // weis a den Wert 7 zu
+				System.out.println(a); // prints: 7
+				a = 8;
+				System.out.println(a); // prints: 8
+				a = a + 2;
+				System.out.println(a); // prints: 10
+			}
+		}
+	\end{lstlisting}
+	Nach der ersten Zuweisung ist eine Variable vollständig initialisiert.
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a = -9;
+				int b;
+				b = a;
+				System.out.println(a);
+				System.out.println(b); 
+				a++;
+				System.out.println(a); 
+			}
+		}
+	\end{lstlisting}
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int a = -9; // Deklaration mit Zuweisung
+				int b; // declaration of b
+				b = a; // assignment of b
+				System.out.println(a); // prints: -9
+				System.out.println(b); // prints: -9
+				a++; // increments a
+				System.out.println(a); // prints: -8
+			}
+		}
+	\end{lstlisting}
+	% \framebreak
+	% 	\begin{lstlisting}
+		% 	public class Calc {
+			% 	    public static void main(String[] args) {
+				% 	        int b; // declaration of b
+				% 	        System.out.println(b);
+				% 	    }
+			% 	}
+		% 	\end{lstlisting}
+	% 	Uninitialized variables will cause an Exception. \\
+	% 	An Exception is a kind of error we will discuss later.\\
+	% 	\vspace{1em}
+	% 	\emph{Always assign your variables!}
+	% \framebreak
+	
+	\framebreak
+	Einige grundlegende Rechenoperationen:
+	\begin{tabular}{ll}
+		Addition & \texttt{a + b;} \\
+		Subtraction & \texttt{a - b;} \\
+		Multiplication &\texttt{a * b;} \\
+		Division & \texttt{a / b;} \\
+		Modulo & \texttt{a \% b;} \\
+		Increment & \texttt{a++;} \\
+		Decrement & \texttt{a--;} \\
+	\end{tabular}
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Rechnen mit \emph{float}}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				float a = 9;
+				float b = 7.5f;
+				System.out.println(a); // prints: 9.0
+				System.out.println(b); // prints: 7.5
+				System.out.println(a + b); // prints: 16.5
+			}
+		}
+	\end{lstlisting}
+	
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				float a = 0.1f;
+				float b = 0.2f;
+				
+				System.out.println(((a + b) == 0.3));
+			}
+		}
+	\end{lstlisting}
+	
+	
+	\framebreak
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				float a = 0.1f;
+				float b = 0.2f;
+				
+				System.out.println(((a + b) == 0.3)); // false
+				System.out.println((a + b));
+			}
+		}
+	\end{lstlisting}
+	Float besitzt nur eine begrenzte Genauigkeit. \\
+	\emph{Dies kann zu unvorhersehbaren Ergebnissen führen!}
+\end{frame}
+
+\begin{frame}[fragile]{Rechnnen mit \emph{int} und \emph{float}}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				float a = 9.3f;
+				int b = 3;
+				System.out.println(a + b); // prints: 12.3
+				float c = a + b;
+				System.out.println(c); // prints: 12.3
+			}
+		}
+	\end{lstlisting}
+	Java konvertiert automatisch von \textbf{int} zu \textbf{float}, wenn dies nötig ist. \\
+	Aber nicht andersherum.
+\end{frame}
+
+\subsection{Text mit Strings}
+
+\begin{frame}[fragile]{Strings}
+	Ein String ist ein primitiver Datentyp. Es ist ein Objekt \\
+	Objekte werden in der nächsten Stunde besprochen.
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				String hello = "Hello World!";
+				System.out.println(hello); // print: Hello World!
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Concatenation}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				String hello = "Hello";
+				String world = " World!";
+				String sentence = hello + world;
+				System.out.println(sentence);
+				System.out.println(hello + " World!");
+			}
+		}
+	\end{lstlisting}
+	Man Strings mit den + Operator aneinander hängen. Dadurch sehen beide Zeilen gleich aus.
+\end{frame}
+
+\begin{frame}[fragile]{Strings und Zahlen}
+	\begin{lstlisting}
+		public class Calc {
+			public static void main(String[] args) {
+				int factorA = 3;
+				int factorB = 7;
+				int product = factorA * factorB;
+				String answer =
+				factorA + " * " + factorB + " = " + product;
+				System.out.println(answer); // prints: 3 * 7 = 21
+			}
+		}
+	\end{lstlisting}
+	Wenn ein primitiver Datentyp mit einen String verbunden wird, wird dieser in eine \emph{String} umgewandelt.
+\end{frame}
+
+\begin{frame}{Zusammenfassung}
+	Datentypen
+	\begin{itemize}
+		\item int, long
+		\item float, double
+		\item String
+	\end{itemize}
+	Hello World Beispiel
+\end{frame}
+
+\section{Input}
+\begin{frame}[fragile, allowframebreaks]{Eingabe vom \emph{Benutzer} }
+	
+	Um eine Eingabe von einen Nutzer zu lesen benötigen wir ein Objekt vom Typ Scanner. Dafür müssen wir das Paket java.util.Scanner importieren.
+	
+	\begin{lstlisting}
+		import java.util.Scanner; 
+		public class Input
+		{
+			public static void main(String[] args)
+			{
+				//do something
+			}
+		}
+	\end{lstlisting}
+\framebreak
+
+	Um den Scanner zu benutzen, müssen wir zuerst ein Objekt von der Klasse Scanner erzeugen (??? wird in der nächsten Stunde besprochen).
+	
+	\begin{lstlisting}
+		import java.util.Scanner; 
+		public class Input
+		{
+			public static void main(String[] args)
+			{
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Please input a number: ");
+			int a = sc.nextInt();
+			System.out.println("Input number = "+a);
+				
+			}
+		}
+	\end{lstlisting}
+
+\framebreak
+
+Um den Scanner zu benutzen, müssen wir zuerst ein Objekt von der Klasse Scanner erzeugen. (Beispiel-Code, bitte nicht in realen Programmen verwenden)
+
+\begin{lstlisting}
+	import java.util.Scanner; 
+	public class Input
+	{
+		public static void main(String[] args)
+		{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Please input a number: ");
+		int a = sc.nextInt();
+		System.out.println("Input number = "+a);
+		System.out.print("Please input a decimal number: ");
+		Double b = sc.nextDouble();
+		System.out.println("Input number = "+b);
+		}
+	}
+\end{lstlisting}
+
+\framebreak
+
+\begin{lstlisting}
+	import java.util.Scanner; 
+	public class Input
+	{
+		public static void main(String[] args)
+		{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Please input a number: ");
+		int a = sc.nextInt();
+		System.out.println("Input number = "+a);
+		System.out.print("Please input a decimal number: ");
+		Double b = sc.nextDouble();
+		System.out.println("Input number = "+b);
+			System.out.print("Please input a String: ");
+			String c = sc.nextLine();
+			System.out.println("Input String = "+c);	
+		}
+	}
+\end{lstlisting}
+
+\end{frame}
+
+
+
+\section{Control Statements}
+\begin{frame}{Control Statements}
+	
+	\begin{itemize}
+		\item if, else, else if
+		\item for
+		\item while
+	\end{itemize}
+		
+\end{frame}
+
+
+
+\subsection{Ite}
+\begin{frame}[fragile]{{\huge I}f {\huge T}hen {\huge E}lse}
+\begin{lstlisting}
+if(condition) {
+	// do something if condition is true
+} else if(another condition){
+	// do if "else if" condition is true 
+} else {
+	// otherwise do this
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{{\huge I}f {\huge T}hen {\huge E}lse example}
+\begin{lstlisting}
+public class IteExample {
+
+	public static void main(String[] args) {
+		int myNumber = 5;
+		
+		if(myNumber == 3) {
+			System.out.println("Strange number");
+		} else if(myNumber == 2) {
+			System.out.println("Unreachable code");
+		} else {
+			System.out.println("Will be printed");
+		}
+	}
+    
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Vergleichsoperatoren}
+Wie man Dinge vergleicht:
+\begin{itemize}
+    \item \texttt{==} Equal
+    \item \texttt{!=} Not Equal
+    \item \texttt{>} Greater Than (Größer als)
+    \item \texttt{>=} Greater or Equal than (Größer gleich)
+\end{itemize}
+\textit{Note}: Man kann mehrere Vergleiche\\ mit \texttt{\&\&} (AND) or \texttt{||} (OR) verknüpfen.
+\end{frame}
+
+\subsection{for}
+\begin{frame}[fragile]{for}
+\begin{lstlisting}
+for(initial value, condition, change) {
+	// do code while condition is true
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{for example}
+\begin{lstlisting}
+public class ForExample {
+
+	public static void main(String[] args) {
+		for(int i = 0; i <= 10; i++) {
+			System.out.print("na ");
+		}
+		System.out.println("BATMAN!");
+	}
+    
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{while}
+\begin{frame}[fragile]{while}
+\begin{lstlisting}
+while(condition) {
+	// do code while condition is true
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{while example}
+\begin{lstlisting}
+public class WhileExample {
+
+	public static void main(String[] args) {
+		int a = 0;
+		while(a <= 10) {
+			System.out.println(a);
+            a++; // Otherwise you would get an endless loop
+		}
+	}
+    
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Methoden}
+\begin{frame}{Was ist eine Methode?}
+	Was ist eine Methode?
+	\begin{itemize}
+		\item<1-> ein Stück Code zum Wiederverwenden
+		\item<2-> kann Daten von Außen bekommen
+		\item<3-> kann Daten nach Außen zurückgeben
+	\end{itemize}
+	\onslide<4->{Andere Namen
+	\begin{itemize}
+		\item function
+		\item procedure
+		\item subroutine
+	\end{itemize}
+}
+
+\end{frame}
+
+\begin{frame}{Warum sollten man Methoden verwenden?}
+	Warum sollten man Methoden verwenden?
+	\begin{itemize}
+		\item<1-> Programmierer sind faul $\rightarrow$ Mehr mit weniger erreichen
+		\item<2-> bessere Struktur und weniger Änderungen
+		\item<3-> reduziert Fehler
+		\item<4-> wichtig für OOP
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks] {Einführung in die \emph{Methoden}}
+	Die einfachste Methode
+	\begin{lstlisting}
+	static void helloMethod(){
+		System.out.println("Hello, method!");	
+	}
+	\end{lstlisting}
+\framebreak
+	Eine Methode aufrufen
+	\begin{lstlisting}
+	class Hello{
+		public static main(String[] args){
+			helloMethod();
+		}
+		static void helloMethod(){
+			System.out.println("Hello, method!");	
+		}
+	}
+	\end{lstlisting}
+
+\framebreak
+	Daten an eine Methode übergeben (Parameter)
+	\begin{lstlisting}
+		static void printHello(String input){
+			System.out.println("Hello, " + input + "!");	
+		}
+	\end{lstlisting}
+
+\framebreak
+	Daten aus einer Methode zurückgeben (Return)
+	\begin{lstlisting}
+		static String getHello(String input){
+			String hello = "Hello, " + input + "!";	
+			return hello;
+			// return "Hello, " + input + "!";
+		}
+	\end{lstlisting}
+
+\framebreak
+DEMO
+	
+
+\end{frame}
+
+\begin{frame}{Übung}
+	Gebe alle geraden Zahlen zischen 1 und 100/n aus. (n - User input)
+	\begin{itemize}
+		\item<2-> benutze while und if
+		\item<3-> benutze for (und nicht if)
+		\item<4-> benutze eine Methode zur Überprüfung
+		
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{center}
+		\includegraphics[angle=-90, width=\textwidth]{0001}
+	\end{center}	
+
+\end{frame}
+
+
+
+\end{document}
