@@ -279,7 +279,7 @@
 \begin{frame}[fragile, allowframebreaks]{Taking input from \emph{the User} }
 	
 	To take input from the user we use the Scanner class. 
-	For this we need to import the java.util.io package. 
+	For this we need to import the java.util.Scanner package. 
 	
 	\begin{lstlisting}
 		import java.util.Scanner; 
@@ -464,6 +464,88 @@ public class WhileExample {
     
 }
 \end{lstlisting}
+\end{frame}
+
+\section{Methods}
+\begin{frame}{What is a method?}
+	What is a method?
+	\begin{itemize}
+		\item<1-> piece of code which can be reused
+		\item<2-> can take input from the outside
+		\item<3-> can return data to the outside
+	\end{itemize}
+	\onslide<4->{Other names:
+	\begin{itemize}
+		\item function
+		\item procedure
+		\item subroutine
+	\end{itemize}
+}
+\end{frame}
+
+\begin{frame}{Why use methods?}
+	Why use methods?
+	\begin{itemize}
+		\item<1-> programmers are lazy $\rightarrow$ do more with less code
+		\item<2-> better structure and less changes
+		\item<3-> reduces errors
+		\item<4-> important for OOP
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks] {Introduction to \emph{methods}}
+	The most basic method
+	\begin{lstlisting}
+	static void helloMethod(){
+		System.out.println("Hello, method!");	
+	}
+	\end{lstlisting}
+\framebreak
+	Calling the method in main
+	\begin{lstlisting}
+	class Hello{
+		public static main(String[] args){
+			helloMethod();
+		}
+		static void helloMethod(){
+			System.out.println("Hello, method!");	
+		}
+	}
+	\end{lstlisting}
+
+\framebreak
+	Giving data into a function (Parameters)
+	\begin{lstlisting}
+		static void printHello(String input){
+			System.out.println("Hello, " + input + "!");	
+		}
+	\end{lstlisting}
+
+\framebreak
+	Returning data from the function (Return)
+	\begin{lstlisting}
+		static String getHello(String input){
+			String hello = "Hello, " + input + "!";	
+			return hello;
+			// return "Hello, " + input + "!";
+		}
+	\end{lstlisting}
+
+\framebreak
+DEMO
+	
+
+\end{frame}
+
+\begin{frame}{Exercise}
+	Print all even numbers between 1 and 100/n (take user input)
+	\begin{itemize}
+		\item<2-> with while and if
+		\item<3-> with for (without if)
+		\item<4-> with a function to check evenness
+		
+	\end{itemize}
 \end{frame}
 
 
