@@ -1,0 +1,412 @@
+\input{../templates/course_definitions}
+\input{../templates/course_information}
+
+\title{Java}
+\subtitle{Controll Statements and OOP}
+\date{\today}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	\begin{frame}{Overview}
+		\setbeamertemplate{section in toc}[sections numbered]
+		\tableofcontents
+	\end{frame}
+	
+	\section{Recalling last session}
+	\begin{frame}{Conclusion}
+		Control Structures
+		\begin{itemize}
+			\item taking input
+			\item If-Then-Else
+			\item for and while loop
+			\item Conditions
+		\end{itemize}
+		Na Na Na Na Na Na Na Na Batman
+	\end{frame}	
+	
+	\section{OOP in Java}
+	
+	\begin{frame}{}
+		\begin{center}
+			{\huge Object Oriented Programming}
+		\end{center}
+	\end{frame}
+
+	\subsection{Main concept}
+	\begin{frame}[fragile]{What is OOP?}
+		\begin{itemize}
+			\item OOP - Object Oriented Programming
+			\item want to model the real world
+			\item take things and create digital copy
+			\item two main concepts - Objects and Classes
+		\end{itemize}	
+	\end{frame}
+	\begin{frame}[fragile]{What is a class?}
+		A blueprint for a series of objects with common attributes/methods \\
+		Example Car: \\
+		\begin{itemize}
+			\item<2-> attributes \\ \begin{itemize}
+					\item wheels
+					\item windows
+					\item color
+					\item engine
+					\item ...
+					
+				\end{itemize}
+			\item<3-> methods \\ 
+						\begin{itemize}
+							\item accelerate
+							\item break
+							\item toggle turn signal
+							\item ...
+						\end{itemize}
+		\end{itemize}
+		
+	\end{frame}
+
+	\begin{frame}[fragile]{What is an object?}
+		An object is an instantiation of a class
+		\begin{itemize}
+			\item a class does not really exist
+			\item only objects exist
+			\item taking a class and filling it with data
+			\item can be created and destroyed
+		\end{itemize} 
+	\end{frame}
+	
+	\subsection{General information}
+	
+	\begin{frame}[fragile]{Class Student}
+		\begin{lstlisting}
+			public class Student {
+				
+				// Attributes
+				private String name; 
+				private int matriculationNumber; 
+				
+				
+				// Methods
+				public void setName(String name) {
+					this.name = name;
+				}
+				
+				public int getMatriculationNumber() {
+					return matriculationNumber;
+				}
+				
+			}
+		\end{lstlisting}
+		
+		% What is visible here:
+		% Attributes store the state of the object
+		% Methods implement the behaviour of the object
+		
+	\end{frame}
+
+	\begin{frame}{private, public, protected?}
+		\begin{itemize}
+			\item<1-> there is an outside and an inside
+			\item<2-> not everything should be visible from the outside
+			\item<3-> have to tell the compiler what to show and what not
+			\item<4-> keywords \\
+				\begin{itemize}
+					\item private - only visible from inside the class
+					\item public - visible from everywhere
+					\item protected - visible to child classes
+				\end{itemize}
+			
+			\item<5-> attributes should always be private (or protected)
+			\item<6-> methods which are for internal use should be private
+			\item<7-> every other methods can/should be public
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Class Student}
+		\begin{lstlisting}
+			public class Student {
+				
+				// Attributes
+				private String name; 
+				private int matriculationNumber; 
+				
+				
+				// Methods
+				public void setName(String name) {
+					this.name = name;
+				}
+				
+				public int getMatriculationNumber() {
+					return matriculationNumber;
+				}
+				
+			}
+		\end{lstlisting}
+		
+		% What is visible here:
+		% Attributes store the state of the object
+		% Methods implement the behaviour of the object
+		
+	\end{frame}
+	
+	\begin{frame}[fragile]{Creation}
+		We learned how to declare and assign a primitive datatype.
+		
+		\begin{lstlisting}
+			int a; // declare a
+			a = 273; // assign 273 to a
+		\end{lstlisting} 
+		
+		The creation of an object works similar.
+		
+		\begin{lstlisting}
+			Student example = new Student(); 
+			// create an instance of Student
+		\end{lstlisting}
+		The \textbf{object} derived from a \textbf{class} is also called \textbf{instance}.
+		The variable is called the \textbf{reference}.
+	\end{frame}
+
+	\begin{frame}[fragile]{Class Student}
+		\begin{lstlisting}
+			public class Student {
+				
+				// Attributes
+				private String name; 
+				private int matriculationNumber; 
+				
+				
+				// Methods
+				public void setName(String name) {
+					this.name = name;
+				}
+				
+				public int getMatriculationNumber() {
+					return matriculationNumber;
+				}
+				
+			}
+		\end{lstlisting}
+		
+		% What is visible here:
+		% Attributes store the state of the object
+		% Methods implement the behaviour of the object
+		
+	\end{frame}
+
+	\begin{frame}{What is a method?}
+		What is a method?
+		\begin{itemize}
+			\item<1-> piece of code which can be reused
+			\item<2-> can take input from the outside
+			\item<3-> can return data to the outside
+		\end{itemize}
+		\onslide<4->{Other names:
+			\begin{itemize}
+				\item function
+				\item procedure
+				\item subroutine
+			\end{itemize}
+		}
+	\end{frame}
+	
+	\begin{frame}{Why use methods?}
+		Why use methods?
+		\begin{itemize}
+			\item<1-> programmers are lazy $\rightarrow$ do more with less code
+			\item<2-> better structure and less changes
+			\item<3-> reduces errors
+			\item<4-> important for OOP
+		\end{itemize}
+		
+	\end{frame}
+	
+	\subsection{Methods}
+	\begin{frame}[fragile]{Calling a Method}
+		\begin{lstlisting}
+			public class Student {
+				
+				private String name;
+				
+				public String getName() {
+					return name;
+				}
+				
+				public void setName(String newName) {
+					name = newName;
+				}
+				
+			}
+		\end{lstlisting}
+		The class \emph{Student} has two methods: \emph{void setName()} and \emph{String getName()}.
+	\end{frame}
+	
+	\begin{frame}[fragile]{Calling a Method}
+		\begin{lstlisting}
+			public class Main {
+				
+				public static void main(String[] args) {
+					Student example = new Student(); // creation
+					example.setName("Jane"); // method call
+					String name = example.getName(); 
+					System.out.println(name); // Prints "Jane"
+				}
+				
+			}
+		\end{lstlisting}
+		You can call a method of an object after its creation with \textbf{reference.methodName();}.
+	\end{frame}
+	
+	\begin{frame}[fragile]{Calling a Method}
+		\begin{lstlisting}
+			public class Student {
+				
+				private String name;
+				
+				public void setName(String newName) {
+					name = newName;
+					printName();   // Call own method
+					this.printName(); // Or this way
+				}
+				
+				public void printName() {
+					System.out.println(name);
+				}
+				
+			}
+		\end{lstlisting}
+		You can call a method of the own object by simply writing \textbf{methodName();} or \textbf{this.methodName();}
+	\end{frame}
+	
+	\begin{frame}[fragile]{Methods with Arguments}
+		
+		\begin{lstlisting}
+			public class Calc {
+				
+				public void add(int summand1, int summand2) {
+					System.out.println(summand1 + summand2);
+				}
+				
+				public static void main(String[] args) {
+					int summandA = 1;
+					int summandB = 2;
+					Calc calculator = new Calc();
+					System.out.print("1 + 2 = ");
+					calculator.add(summandA, summandB); 
+					// prints: 3
+				}
+				
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\subsection{Return Value}
+	\begin{frame}[fragile]{Methods with Return Value}
+		A method without a return value is indicated by \textbf{void}:
+		\begin{lstlisting}
+			public void add(int summand1, int summand2) {
+				System.out.println(summand1 + summand2);
+			}
+		\end{lstlisting}
+		A method with an \textbf{int} as return value:
+		\begin{lstlisting}
+			public int add(int summand1, int summand2) {
+				return summand1 + summand2;
+			}
+		\end{lstlisting}
+		% TODO explain return statement
+	\end{frame}
+	
+	\begin{frame}[fragile]{Calling Methods with a return value}
+		\begin{lstlisting}
+			public class Calc {
+				
+				public int add(int summand1, int summand2) {
+					return summand1 + summand2;
+				}
+				
+				public static void main(String[] args) {
+					Calc calculator = new Calc();
+					int sum = calculator.add(3, 8);
+					System.out.print("3 + 8 = " + sum); 
+					// prints: 3 + 8 = 11
+				}
+				
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\subsection{Constructor}
+	
+	\begin{frame}[fragile]{Constructors}
+		\begin{lstlisting}
+			public class Calc {
+				
+				private int summand1;
+				private int summand2;
+				
+				public Calc() {
+					summand1 = 0;
+					summand2 = 0;
+				}
+				
+			}
+		\end{lstlisting}
+		A constructor gets called upon creation of the object
+	\end{frame}
+	
+	\begin{frame}[fragile]{Constructors with Arguments}
+		\begin{lstlisting}
+			public class Calc {
+				
+				private int summand1;
+				private int summand2;
+				
+				public Calc(int x, int y) {
+					summand1 = x;
+					summand2 = y;
+				}
+				
+			}
+		\end{lstlisting}
+		\begin{lstlisting}
+			[...]
+			Calc myCalc = new Calc(7, 9);
+		\end{lstlisting}
+		
+		A constructor can have arguments as well!
+	\end{frame}
+	
+	\section{Conclusion}
+	\subsection{An Example}
+	
+	\begin{frame}{An Example}
+		You want to program an enrollment system, for a programming course. \\
+		\vspace{1em}
+		Your classes are:\\
+		\begin{description}
+			\item[student] who wants to attend the course
+			\item[lesson] which is a part of the course
+			\item[tutor] the guy with the bandshirt
+			\item[room] where your lessons take place
+			\item[\dots]
+		\end{description}
+		% 	The more you think about it, the more complex this program becomes.
+		% 	Focus on the relevant things.
+		%	Think about how the objects can be in relation, this will be discussed later
+		%	Show prepared classes in Java
+	\end{frame}
+	
+	
+	\begin{frame}[fragile]{Class Student}
+		\begin{lstlisting}
+			public static void main(String[] args) {
+				Student peter = new Student();
+				peter.changeName("Peter");
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+\end{document}
