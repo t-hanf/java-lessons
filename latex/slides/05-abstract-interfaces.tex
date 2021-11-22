@@ -1,0 +1,377 @@
+\input{../templates/course_definitions}
+\input{../templates/course_information}
+
+\usepackage{hyperref}
+
+\title{Java}
+\subtitle{Abstract and Interfaces}
+\date{\today}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	\begin{frame}{Overview}
+		\setbeamertemplate{section in toc}[sections numbered]
+		\tableofcontents
+	\end{frame}
+
+\section{Abstract}
+\subsection{}
+\begin{frame}[fragile]{Abstract Class}
+	The keyword \textbf{abstract} denotes an abstract class.
+	\vfill
+	\begin{lstlisting}
+		public abstract class AbstractExample {
+			
+		}	
+	\end{lstlisting}
+	\vfill
+	\begin{itemize}
+		\item You can not create objects from an abstract class.\\
+		\item Abstract classes can extend other abstract classes and can implement interfaces \footnote[1]{Interfaces will be discussed later}.\\
+		\item Abstract classes can be extended by normal and abstract classes.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Methods}
+	An abstract class may has concrete methods and may has abstract methods. It can also has fields (attributes).
+	\begin{lstlisting}
+		public abstract class AbstractExample {
+			
+			public void printHello() {
+				System.out.println("Hello");	    
+			}
+			
+			public abstract String getName();
+		}	
+	\end{lstlisting}
+	An abstract method forces the class to be abstract as well. \\
+	%\emph{Methods in an interface are also abstract but not denoted as such.}
+\end{frame}
+
+\begin{frame}[fragile]{Subclasses}
+	The subclass has to implement abstract methods or has to be abstract as well.
+	All concrete methods will be regular inherited.
+	\begin{lstlisting}[escapechar=!]
+		public class Example extends AbstractExample {
+			
+			@Override
+			public String getName() {
+				return "Example";	    
+			}
+		}	
+	\end{lstlisting}
+\end{frame}
+
+\section{Polymorphism}
+\begin{frame}{Types}
+	Definition: providing a single interface to entities of different types \footnote{\url{https://www.stroustrup.com/glossary.html\#Gpolymorphism}}
+	
+	Two different types of polymorphism in Java:
+	\begin{itemize}
+		\item function/operator overloading
+		\item subtyping (polymorphism)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Function overloading}
+	Having the same function name but different parameters (types or number)
+	\begin{lstlisting}[escapechar=!]
+		public class Calc {
+			
+			double Add(double a, double b){
+				System.out.println("Adding doubles");
+				return a + b;
+			}
+		
+			int Add(int a, int b){
+				System.out.println("Adding integers");
+				return a + b;
+			}
+		}	
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Function overloading}
+	Calling the function with different types.
+	\begin{lstlisting}[escapechar=!]
+		public class Main {
+			
+			public static main(String[] args){
+				Calc calc = new Calc();
+				
+				calc.Add(3.5, 4.6);
+				// prints: Adding doubles
+				
+				calc.Add(3, 4);
+				// prints: Adding integers
+			}
+		}	
+	\end{lstlisting}
+	The compiler will check the types of the parameters an select the right function based on the signature.
+\end{frame}
+
+\begin{frame}[fragile]{Polymorphism}
+	\begin{lstlisting}[escapechar=!]
+		public class Person {	
+			...
+			
+			public void sendEmail(String message){
+				System.out.println("To: " this.email 
+				+ " \n" + message);
+			}
+		}
+		
+		public class Student extends Person {
+			@Override
+			public void sendEmail(String message){
+				System.out.println("To: " this.email +
+				 " \n" + "Dear student :" + message);
+			}	
+		}
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Polymorphism}
+	Using the interface of the super class
+	\begin{lstlisting}[escapechar=!]
+		public class Main {
+			public static main(String[] args){
+				Person p1 = new Person("Bob");
+				Person p2 = new Student("Alice");
+				
+				p1.sendEmail("Hello");
+				// prints: 	To: bob@school.org
+				//			Hello
+				
+				p2.sendEmail("Hello");
+				// prints: 	To: alice@school.org
+				//			Dear student: Hello	
+			}	
+		}
+	\end{lstlisting}
+	A object of type \texttt{Student} can be assigned to a variable of type \texttt{Person} because \texttt{Student} is a subclass of \texttt{Person}.
+	\end{frame}
+
+
+\section{Static}
+
+\subsection{Overview}
+%TODO improve this overview - add an example - think about the headline
+\begin{frame}{Static Keyword}
+	An object is an instance of a class with its attributes and methods.
+	The object is the actor and the class just a blueprint.
+	\vfill
+	Static class members are not linked to a certain instance of the class.
+	Therefore the class can also be an actor.
+	\vfill
+	Static class members are:
+	\begin{itemize}
+		\item static attributes, often called class variables
+		\item static methods, often called class methods
+	\end{itemize}
+\end{frame}
+
+\subsection{Examples}
+\begin{frame}[fragile]{Class Variables}
+	In the setter \texttt{count} is addressed via \texttt{Example.count}.
+	Using \texttt{this.count} is misleading, because \texttt{count} is a class variable.	
+	\begin{lstlisting}
+		public class Example {
+			
+			public static count;
+			
+			public setCount(int count) {
+				Example.count = count;
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Class Variables - Test}
+	The test prints the class variable \texttt{Example.count} which is altered
+	by the different instances of the class \emph{Example}.	
+	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+		public class ExampleTest {
+			
+			public static void main (String[] args) {
+				Example e1 = new Example();
+				Example e2 = new Example();
+				
+				e1.setCount(4);
+				System.out.println(Example.count); // prints: 4
+				e2.setCount(8);
+				System.out.println(Example.count); // prints: 8
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Class Methods}
+	Static methods can be called without an object.
+	They can modify class variables but not attributes (object variables).
+	\begin{lstlisting}
+		public class Example {
+			
+			public static count;
+			
+			public static void setCount(int count) {
+				Example.count = count;
+			}
+		}
+	\end{lstlisting}
+	\begin{lstlisting}
+		public static void main (String[] args) {
+			
+			Example.setCount(4);
+		}
+	\end{lstlisting}
+\end{frame}
+
+\subsection{Implications}
+\begin{frame}[fragile]{Static is an One-Way}
+	Methods from objects can:
+	\begin{itemize}
+		\item access attributes (object variables)
+		\item access class variables
+		\item call methods
+		\item call static methods
+	\end{itemize}
+	Class methods can:
+	\begin{itemize}
+		\item access class variables
+		\item call static methods
+	\end{itemize}
+\end{frame}
+
+\section{Interfaces}
+\subsection{Overview}
+\begin{frame}{}
+	An \textbf{interface} is a well defined set of constants and methods a class have to \textbf{implement}.
+	\vfill
+	You can access objects through their interfaces. So you can work with different kinds of objects easily.
+	\vfill
+	For Example: A post office offers to ship letters, postcards and packages. With an interface
+	\emph{Trackable} you can collect the positions unified. 
+	It is not important how a letter calculates its position.
+	%TODO rethink the following sentence
+	It is important that the letter communicate its position through the methods from the interface.
+	%vfill
+	%conclusion: Seperation from definition and implementation. 
+	%The definition is ?denoted by? the interface.
+\end{frame}
+\subsection{Example}
+\begin{frame}[fragile]{Interface Trackable}
+	An interface contains method signatures. A signature is the definition of a method without the implementation.
+	\begin{lstlisting}
+		public interface Trackable {
+			
+			public int getStatus(int identifier);
+			
+			public Position getPosition(int identifier);
+		}
+	\end{lstlisting}
+	Note: The name of an interface often ends with the suffix \emph{-able}.
+\end{frame}
+\begin{frame}[fragile]{Letter implements Trackable}
+	\begin{lstlisting}
+		public class Letter implements Trackable {
+			
+			public Position position;
+			private int identifier;
+			
+			public int getStatus(int identifier) {
+				return this.identifier;
+			}
+			
+			public Position getPosition(int identifier) {
+				return this.position;
+			}
+		}
+	\end{lstlisting}
+	The classes \emph{Postcard} and \emph{Package} also implement the interface \emph{Trackable}.
+\end{frame}
+
+\begin{frame}[fragile]{Access through an Interface}
+	\begin{lstlisting}
+		public static void main(String[] args) {
+			
+			Trackable letter_1 = new Letter();
+			Trackable letter_2 = new Letter();
+			Trackable postcard_1 = new Postcard();
+			Trackable package_1 = new Package();
+			
+			letter_1.getPosition(2345);
+			postcard_1.getStatus(1234);
+		}
+	\end{lstlisting}
+\end{frame}
+
+\subsection{Multiple Interfaces}
+\begin{frame}[fragile]{Two Interfaces}
+	A class can implement multiple interfaces.
+	\vfill
+	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+		public interface Buyable {
+			
+			// constant
+			public float tax = 1.19f;
+			
+			public float getPrice();
+		}
+	\end{lstlisting}
+	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+		public interface Trackable {
+			
+			public int getStatus(int identifier);
+			
+			public Position getPosition(int identifier);
+		}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Postcard implements Buyable and Trackable}
+	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+		public class Postcard implements Buyable, Trackable {
+			
+			public Position position;
+			private int identifier;
+			private float priceWithoutVAT;
+			
+			public float getPrice() {
+				return priceWithoutVAT * tax;
+			}
+			
+			public int getStatus(int identifier) {
+				return this.identifier;
+			}
+			
+			public Position getPosition(int identifier) {
+				return this.position;
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Access multiple Interfaces}
+	\begin{lstlisting}
+		public static void main(String[] args) {
+			
+			Trackable postcard_T = new Postcard();
+			Postcard postcard_P = new Postcard();
+			Buyable postcard_B = new Postcard();
+			
+			postcard_T.getStatus(1234);
+			postcard_B.getPrice();
+			postcard_P.getStatus(1234);
+			postcard_P.getPrice();
+		}
+	\end{lstlisting}
+	\texttt{postcard\_P} can access both interfaces.\\
+	\texttt{postcard\_T} can access Trackable.\\
+	\texttt{postcard\_B} can access Buyable.
+\end{frame}
+\end{document}
