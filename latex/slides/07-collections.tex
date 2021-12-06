@@ -92,30 +92,16 @@
 	There are interfaces to access the data structures in an easy way.
 	There are multiple implementations for various needs.
 	Alternatively you can use your own implementations.
+	
+	Documentation: \url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html}
 \end{frame}
 
-\subsection{Set and List}
-\begin{frame}[fragile]{Set}
-	A set is a collection that holds one type of objects.
-	A set can not contain one element twice.
-	Like all collections the interface \emph{Set} is part of the package \texttt{java.util}.
-	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-	import java.util.*;
-
-	public class TestSet {
-	    
-	    public static void main(String[] args) {
-	        Set<String> set = new HashSet<String>();
-	    
-	        set.add("foo");
-	        set.add("bar");
-	        set.remove("foo");
-	        System.out.println(set); // prints: [bar]
-	    }
-	}
-	\end{lstlisting}
-	In the following examples \texttt{import java.util.*;} will be omitted.
+\begin{frame}
+	\includegraphics[width=\textwidth]{07_collection/collection.png}
 \end{frame}
+
+
+\subsection{List}
 
 \begin{frame}[fragile]{List}
 	A list is an ordered collection.
@@ -135,6 +121,7 @@
 	    System.out.println(list); // prints: [foo, bar, foo]
 	}
 	\end{lstlisting}
+\url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html}
 \end{frame}
 	
 \begin{frame}[fragile]{List Methods}
@@ -163,6 +150,29 @@
 		E & \texttt{getLast()}
 		& \footnotesize{get last element}
 	\end{tabular}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{LinkedList vs ArrayList}
+	
+	ArrayList\footnote{ \url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ArrayList.html}}:
+	\begin{itemize}
+		\item Resizeable-array implementation
+		\item List has a specific capacity, may have to be resized (automatically)
+		\item But \texttt{add()} runs in amortized constant time (O(n))
+		\item \texttt{size}, \texttt{isEmpty}, \texttt{get}, \texttt{set}, \texttt{iterator}, and \texttt{listIterator} in constant time
+		\item Any other method runs in linear time
+	\end{itemize}
+
+	\framebreak
+	LinkedList\footnote{\url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html}}:
+	\begin{itemize}
+		\item Doubly-linked list implementation
+		\item Can grow indefinitely without resizing (memory constraint)
+		\item \texttt{add}, \texttt{get} and \texttt{remove} at the end/beginning fast
+		\item Any other element, time depending on position
+	\end{itemize}
+	 
+
 \end{frame}
 
 \subsection{Iterating}
@@ -225,127 +235,47 @@
 	Special iterators like \emph{ListIterator} are more sophisticated.
 \end{frame}
 
-\subsection{Map}
-\begin{frame}[fragile]{Map}
-	The interface \emph{Map} is not a subinterface of \emph{Collection}.\\
-	A map contains pairs of key and value. Each key refers to a value. 
-	Two keys can refer to the same value. There are not two equal keys in one map.
-	\emph{Map} is part of the package \texttt{java.util}.
-	\vfill
-	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-	public static void main (String[] args) {
+\section{Hands-On}
+\begin{frame}[fragile]{Library (Part 1)}
 	
-	    Map<Integer, String> map = 
-	        new HashMap<Integer, String>();
-	    
-	    map.put(23, "foo");
-	    map.put(28, "foo");
-	    map.put(31, "bar");
-	    map.put(23, "bar"); // "bar" replaces "foo" for key = 23
-	    
-	    System.out.println(map);
-	    // prints: {23=bar, 28=foo, 31=bar}
-	}
-	\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Key, Set and Values}
-	You can get the set of keys from the map.
-	Because one value can exist multiple times a collection is used for the values.
-	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-	public static void main (String[] args) {
-	
-	    // [...] map like previous slide
-	    
-	    Set<Integer> keys = map.keySet();
-	    Collection<String> values = map.values();
-	    
-	    System.out.println(keys);
-	    // prints: [23, 28, 31]
-	    
-	    System.out.println(values);
-	    // prints: [bar, foo, bar]
-	}
-	\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Iterator}
-	To iterate over a map use the iterator from the set of keys.
-	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-	public static void main (String[] args) {
-	
-	    // [...] map, keys, values like previous slide    	    
-	    Iterator<Integer> iter = keys.iterator();
-	    
-	    while(iter.hasNext()) {
-	        System.out.print(map.get(iter.next()) + " ");
-	    } // prints: bar foo bar
-	    
-	    System.out.println(); // print a line break
-	    
-	    for(Integer i: keys) {
-	        System.out.print(map.get(i) + " ");
-	    } // prints: bar foo bar
-	}
-	\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Nested Maps}
-	Nested maps offer storage with key pairs.
-	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-	public static void main (String[] args) {		
-	
-	    Map<String, Map<Integer, String>> addresses = 
-		    new HashMap<String, Map<Integer, String>>();
-		
-	    addresses.put("Noethnitzer Str.", 
-	        new HashMap<Integer, String>());
-		
-	    addresses.get("Noethnitzer Str.").
-	        put(46, "Andreas-Pfitzmann-Bau");
-	    addresses.get("Noethnitzer Str.").
-	        put(44, "Fraunhofer IWU");
-	}
-	\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Maps and Lambda}
-	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-		map.forEach((k,v) -> {
-			//Key and Value
-			System.out.println("Key: " + k + ", value: " v);
-		})
-	\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Maps and For Each}
-  You can interate through the entry set of a map (available before Java 1.8)
-	\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-      Map<String, String> map = ...
-      for (Map.Entry<String, String> entry : map.entrySet()) {
-        System.out.println("Key: " + entry.getKey() +
-        ", value" + entry.getValue());
-      }
-	\end{lstlisting}
-\end{frame}
-
-\begin{frame}{Overview}
 	\begin{center}
-		\begin{tabular}{ l | l }
-			List & Keeps order of objects \\
-				 & Easily traversible \\
-				 & Search not effective \\
-			\hline
-			Set  & No duplicates \\
-				 & No order - still traversible \\
-				 & Effective searching \\
-			\hline
-			Map  & Key-Value storage \\
-				 & Search super-effective \\
-				 & Traversing difficult
-			
-		\end{tabular}
+		\includegraphics[width=\textwidth]{07_collection/hands_on_01.png}
 	\end{center}
+
+	
 \end{frame}
+\subsection{Comparable}
+\begin{frame}{Comparable}
+	content...
+\end{frame}
+\begin{frame}{Part 2}
+
+		\begin{center}
+		\includegraphics[width=\textwidth]{07_collection/hands_on_02.png}
+		\end{center}
+
+\end{frame}
+\subsection{Collections}
+\begin{frame}{Collections}
+	content...
+\end{frame}
+\begin{frame}{Part 3}
+
+	\begin{center}
+		\includegraphics[scale=.34]{07_collection/hands_on_03.png}
+	\end{center}
+
+\end{frame}
+
+\begin{frame}{Part 4}
+
+	\begin{center}
+		\includegraphics[scale=.34]{07_collection/hands_on_04.png}
+	\end{center}
+		
+
+		
+\end{frame}
+
 
 \end{document}
