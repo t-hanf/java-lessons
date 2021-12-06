@@ -246,7 +246,20 @@
 \end{frame}
 \subsection{Comparable}
 \begin{frame}{Comparable}
-	content...
+	\begin{itemize}
+		\item \texttt{public interface Comparable<T>}\footnote{\url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Comparable.html}}
+		\item Interface to create a natural ordering of objects
+		\item One method \texttt{int compareTo(T o)}
+		\item should return
+			\begin{itemize}
+				\item 0 if equal
+				\item -1 if smaller
+				\item 1 if greater
+			\end{itemize}
+	\end{itemize}
+	
+
+	
 \end{frame}
 \begin{frame}{Part 2}
 
@@ -257,7 +270,16 @@
 \end{frame}
 \subsection{Collections}
 \begin{frame}{Collections}
-	content...
+	"This class consists exclusively of static methods that operate on or return collections"\footnote{\url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collections.html}}
+
+	Some methods:
+	\begin{itemize}
+		\item \texttt{binarySearch(...)}
+		\item \texttt{max(...)}
+		\item \texttt{min(...)}
+		\item \texttt{reverse(...)}
+		\item \texttt{sort(...)}
+	\end{itemize}
 \end{frame}
 \begin{frame}{Part 3}
 
