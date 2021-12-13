@@ -47,11 +47,8 @@
 	\end{frame}	
 	
 	
-	\section{Collections}
+	\section{Set}
 	
-	
-	
-	\subsection{Overview}
 	\begin{frame}{Collections Framework}
 		Java offers various data structures like \textbf{Sets}, \textbf{Lists} and \textbf{Maps}.
 		Those structures are part of the collections framework.
@@ -98,7 +95,14 @@
 	
 	\end{frame}
 	
-	\subsection{Map}
+\section{Map}
+	\begin{frame}
+		\begin{center}
+			\includegraphics[scale=.5]{08_set_map/maps.png}
+		\end{center}
+		
+	\end{frame}
+
 	\begin{frame}[fragile]{Map}
 		The interface \emph{Map} is not a subinterface of \emph{Collection}.\\
 		A map contains pairs of key and value. Each key refers to a value. 
@@ -185,38 +189,42 @@
 		\begin{frame}[fragile]{Map Methods}
 		some useful Map methods:\\
 		\vspace{1em}
-		\begin{tabular}{ r l r }
-			V & \texttt{remove(Object key)}
+		\begin{tabular}{ r l l }
+			\texttt{V} & \texttt{get(Object key)}
+			& \\
+			& \footnotesize{Returns the value to which the specified key is mapped.} \\
+			\texttt{V} & \texttt{remove(Object key)}
+			& \\
 			& \footnotesize{Removes the mapping for a key from this map if it is present} \\
-			V &\texttt{put(K key, V value)}
+			\texttt{V} &\texttt{put(K key, V value)}
+			& \\
 			& \footnotesize{Associates the specified value with the specified key in this map} \\
-			Collection<V> &\texttt{values()}
+			\texttt{Collection<V>} &\texttt{values()}
+			& \\
 			& \footnotesize{Returns a collection view of the values contained in the map} \\
-			Set<K> &\texttt{keySet()}
+			\texttt{Set<K>} &\texttt{keySet()}
+			& \\
 			& \footnotesize{Returns a set view of the keys contained in the map} \\
 		\end{tabular}
 		
 	\end{frame}
 	
 	
-	\begin{frame}[allowframebreaks]{LinkedList vs ArrayList}
+	\begin{frame}[allowframebreaks]{TreeMap vs HashMap}
 		
-		ArrayList\footnote{ \url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ArrayList.html}}:
+		TreeMap\footnote{ \url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeMap.html}}:
 		\begin{itemize}
-			\item Resizeable-array implementation
-			\item List has a specific capacity, may have to be resized (automatically)
-			\item But \texttt{add()} runs in amortized constant time (O(n))
-			\item \texttt{size}, \texttt{isEmpty}, \texttt{get}, \texttt{set}, \texttt{iterator}, and \texttt{listIterator} in constant time
-			\item Any other method runs in linear time
+			\item Red-Black tree implementation
+			\item has an ordering $\rightarrow$ can be sorted
+			\item guaranteed \texttt{log(n)} time constant for \texttt{get}, \texttt{put} and \texttt{remove}
 		\end{itemize}
 		
 		\framebreak
-		LinkedList\footnote{\url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html}}:
+		HashMap\footnote{\url{https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html}}:
 		\begin{itemize}
-			\item Doubly-linked list implementation
-			\item Can grow indefinitely without resizing (memory constraint)
-			\item \texttt{add}, \texttt{get} and \texttt{remove} at the end/beginning fast
-			\item Any other element, time depending on position
+			\item Hash table implementation
+			\item mostly constant time for \texttt{get} and \texttt{put}
+			\item \textit{initial capacity} and \textit{load factor} determine performance
 		\end{itemize}
 		
 		
