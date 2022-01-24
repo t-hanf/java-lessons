@@ -15,6 +15,87 @@
 \tableofcontents
 \end{frame}
 
+\section{Recursion in Java}
+\subsection{What is Recursion?}
+\begin{frame}[fragile]{Recursion}
+	The process in which a function calls itself directly or indirectly is called recursion and the corresponding function is called as recursive function. Using recursive algorithm, certain problems can be solved quite easily. Examples - Towers of Hanoi (TOH), Inorder/Preorder/Postorder Tree Traversals, DFS of Graph, etc.
+\end{frame}
+\begin{frame}[fragile]{Recursion Contd.}
+	Approach 1:
+	\begin{lstlisting}
+		approach(1) - Simply adding one by one
+		f(n) = 1 + 2 + 3 + .... + n 
+	\end{lstlisting}
+    Approach 2:
+    \begin{lstlisting}
+        approach(2) - Mathematical expression 
+    	f(n) = 1             n=1
+    	f(n) = n + f(n-1)    n>1
+    \end{lstlisting}
+\end{frame}
+\subsection{Examples}
+\begin{frame}[fragile]{Example}
+	In the recursive program, the solution to the base case is provided and the solution of the bigger problem is expressed in terms of smaller problems.
+	\begin{lstlisting} 
+	int fact(int n)
+	{
+	if (n < = 1) // base case
+	return 1;
+	else    
+	return n*fact(n-1);    
+	}	
+	\end{lstlisting}
+	In the above example, the base case is defined and larger value of number can be solved by converting to smaller one till base case is reached.
+\end{frame}
+
+\begin{frame}[fragile]{Recursion Example}
+	\begin{lstlisting} 
+	// A Java program to demonstrate working of recursion
+	class GFG {
+		static void printFun(int test)
+		{
+			if (test < 1)
+			return;
+			else {
+				System.out.printf("%d ", test);
+				printFun(test - 1); // statement 2
+				System.out.printf("%d ", test);
+				return;
+			}}
+		// Driver Code
+		public static void main(String[] args){
+			int test = 3;
+			printFun(test);
+		}
+	}
+	\end{lstlisting}
+\end{frame}
+\subsection{Recursion flow in program}
+\begin{frame}[fragile]{Flow of program}
+\begin{center}
+	\includegraphics[width=\textwidth]{09-scopes_gui/0001.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Why Stack Overflow error occurs in recursion?}
+	Happens if the base case is not reached or not defined.
+	\begin{lstlisting} 
+		int fact(int n)
+		{
+			// wrong base case (it may cause stack overflow).
+			if (n == 100) 
+			return 1;
+			else
+			return n*fact(n-1);
+		}
+	\end{lstlisting}
+	If fact(10) is called, it will call fact(9), fact(8), fact(7) and so on but the number will never reach 100. So, the base case is not reached. If the memory is exhausted by these functions on the stack, it will cause a stack overflow error. 
+\end{frame}
+
+\begin{frame}[fragile]{Programming exercise}
+	Refer to fib.java code
+\end{frame}
+
 \section{Scopes}
 \subsection{Classes}
 
@@ -36,28 +117,6 @@
 \end{frame}
 
 \subsection{Controll Structures}
-\begin{frame}[fragile]{If}
-	\begin{lstlisting}
-	...
-	int a = 1;
-	if(...) {
-		int b = 5;
-		System.out.println(a);
-		System.out.println(b);
-	}
-	
-	System.out.println(a);
-	System.out.println(b);
-	...
-	\end{lstlisting}
-	
-	b is only available in the scope of the if.
-	
-	b is not outside of the if available.
-	
-	\color{red} WILL NOT COMPILE
-\end{frame}
-
 \begin{frame}[fragile]{For}
 	\begin{lstlisting}
 	for(int i = 0; i <= 100; i++) {
@@ -70,19 +129,6 @@
 	b will be redefined in every round of the loop and is only available in the for loop.
 	
 	The scope is created at the begining and destroyed at the end of each round.
-\end{frame}
-
-\begin{frame}[fragile]{While}
-	\begin{lstlisting}
-	int i = 0;
-	while(i <= 100) {
-		int b = 3;
-		System.out.println(i);
-		System.out.println(b);
-	}
-	\end{lstlisting}
-	
-	For and while got the same scope behavior.
 \end{frame}
   
 \subsection{Mulit definitions}
@@ -100,11 +146,6 @@
 	Use nearest definition.
 
 	In one scope every variable name can be defined only one time.
-\end{frame}
-
-\begin{frame}{What we learned}
-	Scopes are definition areas for variables.
-	Every Block defines a new Scope.
 \end{frame}
     
 \section{GUI}
