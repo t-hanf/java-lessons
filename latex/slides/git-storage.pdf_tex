@@ -1,0 +1,87 @@
+%% Creator: Inkscape 1.1.1 (3bf5ae0d25, 2021-09-20, custom), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'git-storage.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{326.00458955bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.28046447)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{git-storage.pdf}}%
+    \put(0.46659245,0.05609976){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}blob\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{git-storage.pdf}}%
+    \put(0.46659245,0.36878696){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}tree\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{git-storage.pdf}}%
+    \put(0.46659245,0.23543507){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+filename\end{tabular}}}}%
+    \put(0.46659245,0.18945165){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+mode\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{git-storage.pdf}}%
+    \put(0.60454269,0.39177867){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}subdir\end{tabular}}}}%
+    \put(0.69191117,0.34579526){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}+filename\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{git-storage.pdf}}%
+    \put(0.38228951,0.64275643){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}commit\end{tabular}}}}%
+    \put(0.38228951,0.59677302){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}- message\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{git-storage.pdf}}%
+    \put(0.73698898,0.61976473){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}parents\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{git-storage.pdf}}%
+    \put(0.08186457,0.97643263){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}tag\end{tabular}}}}%
+    \put(0.08186457,0.93044922){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}- name\end{tabular}}}}%
+    \put(0.08186457,0.88446581){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}- message\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{git-storage.pdf}}%
+    \put(0.46659245,0.93504756){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}branchname\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{git-storage.pdf}}%
+    \put(0.46659245,1.23386797){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}HEAD\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{git-storage.pdf}}%
+    \put(0.49571528,1.12350779){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}ref:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{git-storage.pdf}}%
+    \put(0.80073852,0.93504756){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}remotes/MYSERVER/master\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{git-storage.pdf}}%
+    \put(0.1661675,1.23386797){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}tagname\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{git-storage.pdf}}%
+  \end{picture}%
+\endgroup%
